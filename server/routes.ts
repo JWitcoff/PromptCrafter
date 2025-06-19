@@ -37,14 +37,14 @@ Return your response as a JSON object with these exact fields:
 Be concise. Avoid generic tips. Tailor the output precisely to the chosen model and task type.
 
 Model capabilities and behaviors:
-- o3: Newest OpenAI model with advanced reasoning capabilities, strongest performance on complex tasks
-- gpt-4.5: Enhanced version with improved capabilities across all domains
-- gpt-4o: Latest multimodal model, excellent multimodal reasoning, maintains context well, fast and efficient
-- gpt-4-turbo: Strong reasoning, good for complex tasks, handles long contexts
-- gpt-4: Legacy but reliable, excellent for complex reasoning tasks
-- gpt-3.5: Fast and cost-effective, good for simple to moderate tasks
-- gpt-4o-mini: Lightweight version of gpt-4o, efficient for simple tasks
-- gpt-3.5-turbo-instruct: Completion model, different behavior than chat models
+- gpt-4o: Best all-purpose model, excels at real-time reasoning across text, vision, and audio. Ideal for multimodal tasks, fast response, and tool use
+- gpt-4.5: Best for natural, emotionally intelligent chat and creative insights. Strong at writing, intent-following, and reduced hallucinations. Less focused on reasoning
+- gpt-4.1: Specialized for coding and instruction-following. Stronger than GPT-4o for precise dev work and web tasks
+- gpt-4.1-mini: A lightweight, fast instruction-following model for general-purpose use and coding. Fallback for free-tier users
+- o3: State-of-the-art reasoning model. Ideal for deep analysis in math, science, programming, consulting, and visual problem-solving
+- o4-mini: High-performance, cost-efficient reasoning model. Excels in math, data science, and coding with fast throughput; strong at non-STEM too
+- o1: Solid reasoning models for complex problem-solving across coding, math, and research. Less capable than o3/o4-mini and lacks tool access
+- o1-mini: Solid reasoning models for complex problem-solving across coding, math, and research. Less capable than o3/o4-mini and lacks tool access
 
 Task-specific considerations:
 - summarization: Focus on key points, structure, length control

@@ -14,14 +14,46 @@ import type { PromptResponse } from "@/lib/types";
 import ResultsDisplay from "./results-display";
 
 const models = [
-  { value: "o3", label: "o3 (Newest)" },
-  { value: "gpt-4.5", label: "GPT-4.5" },
-  { value: "gpt-4o", label: "GPT-4o" },
-  { value: "gpt-4-turbo", label: "GPT-4 Turbo" },
-  { value: "gpt-4", label: "GPT-4 (Legacy)" },
-  { value: "gpt-4o-mini", label: "GPT-4o Mini" },
-  { value: "gpt-3.5", label: "GPT-3.5" },
-  { value: "gpt-3.5-turbo-instruct", label: "GPT-3.5 Turbo Instruct" },
+  { 
+    value: "gpt-4o", 
+    label: "GPT-4o", 
+    description: "Best all-purpose model: excels at real-time reasoning across text, vision, and audio. Ideal for multimodal tasks, fast response, and tool use in ChatGPT."
+  },
+  { 
+    value: "gpt-4.5", 
+    label: "GPT-4.5", 
+    description: "Best for natural, emotionally intelligent chat and creative insights. Strong at writing, intent-following, and reduced hallucinations. Less focused on reasoning."
+  },
+  { 
+    value: "gpt-4.1", 
+    label: "GPT-4.1", 
+    description: "Specialized for coding and instruction-following. Stronger than GPT-4o for precise dev work and web tasks."
+  },
+  { 
+    value: "gpt-4.1-mini", 
+    label: "GPT-4.1 Mini", 
+    description: "A lightweight, fast instruction-following model for general-purpose use and coding. Fallback for free-tier users."
+  },
+  { 
+    value: "o3", 
+    label: "o3", 
+    description: "State-of-the-art reasoning model. Ideal for deep analysis in math, science, programming, consulting, and visual problem-solving (charts, images, etc)."
+  },
+  { 
+    value: "o4-mini", 
+    label: "o4-mini", 
+    description: "High-performance, cost-efficient reasoning model. Excels in math, data science, and coding with fast throughput; strong at non-STEM too."
+  },
+  { 
+    value: "o1", 
+    label: "o1", 
+    description: "Solid reasoning models for complex problem-solving across coding, math, and research. Less capable than o3/o4-mini and lacks tool access in ChatGPT."
+  },
+  { 
+    value: "o1-mini", 
+    label: "o1 Mini", 
+    description: "Solid reasoning models for complex problem-solving across coding, math, and research. Less capable than o3/o4-mini and lacks tool access in ChatGPT."
+  },
 ];
 
 const taskTypes = [
@@ -128,10 +160,15 @@ export default function PromptGenerator() {
                             <SelectValue placeholder="Select a model..." />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent>
+                        <SelectContent className="max-w-md">
                           {models.map((model) => (
-                            <SelectItem key={model.value} value={model.value}>
-                              {model.label}
+                            <SelectItem key={model.value} value={model.value} className="py-3">
+                              <div className="flex flex-col space-y-1">
+                                <span className="font-medium text-sm">{model.label}</span>
+                                <span className="text-xs text-slate-500 leading-relaxed">
+                                  {model.description}
+                                </span>
+                              </div>
                             </SelectItem>
                           ))}
                         </SelectContent>

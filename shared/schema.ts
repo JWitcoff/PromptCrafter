@@ -19,14 +19,14 @@ export type User = typeof users.$inferSelect;
 // Prompt generation schemas
 export const generatePromptSchema = z.object({
   model: z.enum([
-    "o3",
-    "gpt-4.5",
     "gpt-4o",
-    "gpt-4-turbo", 
-    "gpt-4",
-    "gpt-3.5",
-    "gpt-4o-mini",
-    "gpt-3.5-turbo-instruct"
+    "gpt-4.5",
+    "gpt-4.1",
+    "gpt-4.1-mini",
+    "o3",
+    "o4-mini",
+    "o1",
+    "o1-mini"
   ]),
   taskType: z.enum([
     "summarization",
