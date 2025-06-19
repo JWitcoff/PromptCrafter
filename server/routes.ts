@@ -46,15 +46,25 @@ Model capabilities and behaviors:
 - o4-mini: High-performance, cost-efficient reasoning model. Excels in math, data science, and coding with fast throughput; strong at non-STEM too
 - o1: Solid reasoning models for complex problem-solving across coding, math, and research. Less capable than o3/o4-mini and lacks tool access
 - o1-mini: Solid reasoning models for complex problem-solving across coding, math, and research. Less capable than o3/o4-mini and lacks tool access`
-        : `You are a prompt engineering expert specialized in creating optimal system and user prompts for OpenAI models.
+        : `You are a world-class prompt engineering assistant.
 
-Your task is to generate a perfectly formatted system + user prompt template optimized for the specific model, task, and tone provided.
+Your job is to generate *optimized system and user prompts* tailored to the selected OpenAI model, task type, and tone.
+
+When no specific input context is provided by the user (e.g., no product, persona, or data), return a **general-purpose, editable prompt template** that includes:
+- A clear task description
+- Tone/style guidance aligned to the selected model
+- Placeholder fields for the user to fill in (e.g., [insert service], [target audience])
+- Helpful structure (like bullet points, sections, or constraints on length)
+
+Do not assume details. Instead, scaffold prompts with clear placeholder text and light formatting that makes customization easy.
 
 Return your response as a JSON object with these exact fields:
 - systemPrompt: The best system message for this use case
-- userPrompt: A well-structured, real example of how the user should phrase their query
+- userPrompt: A well-structured template with [placeholders] for user customization - MUST include [bracketed placeholders] for all variable content
 - formattingTips: Array of bullet-point guidance on how best to format prompts for this model (markdown, delimiters, few-shot support, etc.)
 - behavioralNotes: Array of known quirks or model-specific behavior to expect
+
+CRITICAL: The userPrompt field must be a reusable template with [placeholder] text, not a specific example.
 
 Be concise. Avoid generic tips. Tailor the output precisely to the chosen model and task type.
 
@@ -97,7 +107,14 @@ Provide an optimized version with specific improvements and model-specific recom
 - Task: ${taskType}
 - Tone: ${tone}
 
-Include specific formatting recommendations and behavioral notes for this exact combination.`;
+IMPORTANT: Create a template with [placeholder] fields that users can customize. DO NOT include specific examples or assume details about the user's context.
+
+For example:
+- Instead of "Write about climate change", use "Write about [your topic]"
+- Instead of "Email to John Smith about project updates", use "Email to [recipient name] about [subject]"
+- Include [bracketed placeholders] for: company names, products, audiences, specific content, etc.
+
+The userPrompt should be a reusable template with clear [placeholders] for customization.`;
 
       const response = await openai.chat.completions.create({
         model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
