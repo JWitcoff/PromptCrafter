@@ -95,6 +95,17 @@ export default function PromptGenerator() {
     },
   });
 
+  const selectedModel = form.watch("model");
+  const customPrompt = form.watch("customPrompt");
+
+  // Auto-populate custom prompt with ideal example when model changes
+  useEffect(() => {
+    if (selectedModel && !customPrompt) {
+      const modelGuidance = getModelGuidance(selectedModel);
+      form.setValue("customPrompt", modelGuidance.idealUserPromptExample);
+    }
+  }, [selectedModel, customPrompt, form]);
+
   const generateMutation = useMutation({
     mutationFn: async (data: GeneratePromptRequest) => {
       const response = await apiRequest("POST", "/api/generate-prompt", data);
