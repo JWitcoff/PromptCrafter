@@ -21,10 +21,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      const { model, taskType, tone } = validation.data;
+      const { model, taskType, tone, customPrompt } = validation.data;
 
       // System prompt for the OpenAI API to generate optimized prompts
-      const systemPrompt = `You are a prompt engineering expert specialized in creating optimal system and user prompts for OpenAI models.
+      const systemPrompt = customPrompt 
+        ? `You are a prompt engineering expert specialized in optimizing and reformatting prompts for OpenAI models.
+
+Your task is to take the user's existing prompt and reformat/optimize it for the specific model, task type, and tone provided.
+
+Return your response as a JSON object with these exact fields:
+- systemPrompt: An optimized system message based on the user's input, tailored for the chosen model
+- userPrompt: The user's prompt rewritten and optimized for best performance with the chosen model
+- formattingTips: Array of specific improvements made and formatting recommendations for this model
+- behavioralNotes: Array of model-specific behavior notes relevant to this optimized prompt
+
+Focus on concrete improvements to the user's original prompt rather than generic advice.
+
+Model capabilities and behaviors:
+- gpt-4o: Best all-purpose model, excels at real-time reasoning across text, vision, and audio. Ideal for multimodal tasks, fast response, and tool use
+- gpt-4.5: Best for natural, emotionally intelligent chat and creative insights. Strong at writing, intent-following, and reduced hallucinations. Less focused on reasoning
+- gpt-4.1: Specialized for coding and instruction-following. Stronger than GPT-4o for precise dev work and web tasks
+- gpt-4.1-mini: A lightweight, fast instruction-following model for general-purpose use and coding. Fallback for free-tier users
+- o3: State-of-the-art reasoning model. Ideal for deep analysis in math, science, programming, consulting, and visual problem-solving
+- o4-mini: High-performance, cost-efficient reasoning model. Excels in math, data science, and coding with fast throughput; strong at non-STEM too
+- o1: Solid reasoning models for complex problem-solving across coding, math, and research. Less capable than o3/o4-mini and lacks tool access
+- o1-mini: Solid reasoning models for complex problem-solving across coding, math, and research. Less capable than o3/o4-mini and lacks tool access`
+        : `You are a prompt engineering expert specialized in creating optimal system and user prompts for OpenAI models.
 
 Your task is to generate a perfectly formatted system + user prompt template optimized for the specific model, task, and tone provided.
 
@@ -59,7 +81,18 @@ Task-specific considerations:
 - math-logic-proofs: Step-by-step reasoning, verification
 - chatbot-conversations: Natural flow, personality, context maintenance`;
 
-      const userPrompt = `Generate an optimized prompt template for:
+      const userPrompt = customPrompt 
+        ? `Please optimize and reformat this user prompt for the ${model} model:
+
+Original prompt: "${customPrompt}"
+
+Requirements:
+- Model: ${model}
+- Task: ${taskType}
+- Tone: ${tone}
+
+Provide an optimized version with specific improvements and model-specific recommendations.`
+        : `Generate an optimized prompt template for:
 - Model: ${model}
 - Task: ${taskType}
 - Tone: ${tone}

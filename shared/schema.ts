@@ -47,7 +47,8 @@ export const generatePromptSchema = z.object({
     "technical",
     "direct",
     "playful"
-  ])
+  ]),
+  customPrompt: z.string().optional()
 });
 
 // Form schema with optional fields for initial state
