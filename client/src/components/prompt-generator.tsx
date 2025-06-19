@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Wand2, Cpu, ListTodo, Palette, Lightbulb, CheckCircle } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Wand2, Cpu, ListTodo, Palette, Lightbulb, CheckCircle, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { PromptResponse } from "@/lib/types";
 import ResultsDisplay from "./results-display";
@@ -88,6 +89,7 @@ export default function PromptGenerator() {
       model: undefined,
       taskType: undefined,
       tone: undefined,
+      customPrompt: "",
     },
   });
 
@@ -128,7 +130,12 @@ export default function PromptGenerator() {
 
   const handleGenerateNew = () => {
     setResults(null);
-    form.reset();
+    form.reset({
+      model: undefined,
+      taskType: undefined,
+      tone: undefined,
+      customPrompt: "",
+    });
   };
 
   return (
@@ -236,6 +243,31 @@ export default function PromptGenerator() {
                   )}
                 />
 
+                {/* Custom Prompt Input */}
+                <FormField
+                  control={form.control}
+                  name="customPrompt"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="flex items-center text-sm font-medium text-slate-700">
+                        <FileText className="mr-2 h-4 w-4 text-purple-500" />
+                        Custom Prompt (Optional)
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Enter your existing prompt here to optimize it for the selected model..."
+                          className="min-h-[100px] resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+                      <p className="text-xs text-slate-500 mt-1">
+                        Leave empty to generate a new template, or paste your prompt to optimize it
+                      </p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 {/* Generate Button */}
                 <Button 
                   type="submit" 
@@ -245,12 +277,12 @@ export default function PromptGenerator() {
                   {generateMutation.isPending ? (
                     <>
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                      Generating...
+                      {form.watch("customPrompt") ? "Optimizing..." : "Generating..."}
                     </>
                   ) : (
                     <>
                       <Wand2 className="mr-2 h-4 w-4" />
-                      Generate Prompt
+                      {form.watch("customPrompt") ? "Optimize Prompt" : "Generate Prompt"}
                     </>
                   )}
                 </Button>
