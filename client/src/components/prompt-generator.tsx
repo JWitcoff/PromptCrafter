@@ -13,6 +13,7 @@ import { Wand2, Cpu, ListTodo, Palette, Lightbulb, CheckCircle, FileText } from 
 import { useToast } from "@/hooks/use-toast";
 import type { PromptResponse } from "@/lib/types";
 import ResultsDisplay from "./results-display";
+import { FieldSelectorHoverCard } from "@/components/Tooltips";
 
 const models = [
   { 
@@ -145,7 +146,10 @@ export default function PromptGenerator() {
         <Card className="shadow-sm">
           <CardContent className="pt-6">
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-slate-900 mb-2">Generate Optimized Prompts</h2>
+              <div className="flex items-center gap-2 mb-2">
+                <h2 className="text-lg font-semibold text-slate-900">Generate Optimized Prompts</h2>
+                <FieldSelectorHoverCard />
+              </div>
               <p className="text-sm text-slate-600">Configure your requirements to get model-specific prompt templates</p>
             </div>
 

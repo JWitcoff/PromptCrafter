@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Wand2, FileCode, Settings, User, List, Brain, Copy, RefreshCw, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { PromptResponse } from "@/lib/types";
+import { SystemPromptTooltip, UserPromptTooltip } from "@/components/Tooltips";
 
 interface ResultsDisplayProps {
   results: PromptResponse | null;
@@ -89,9 +90,10 @@ export default function ResultsDisplay({ results, selectedModel, onGenerateNew }
           {/* System Prompt Section */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-slate-900 flex items-center">
-                <Settings className="mr-2 h-4 w-4 text-blue-500" />
+              <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+                <Settings className="h-4 w-4 text-blue-500" />
                 System Prompt
+                <SystemPromptTooltip />
               </h3>
               <Button
                 variant="ghost"
@@ -117,9 +119,10 @@ export default function ResultsDisplay({ results, selectedModel, onGenerateNew }
           {/* User Prompt Section */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-slate-900 flex items-center">
-                <User className="mr-2 h-4 w-4 text-emerald-500" />
+              <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+                <User className="h-4 w-4 text-emerald-500" />
                 User Prompt Template
+                <UserPromptTooltip />
               </h3>
               <Button
                 variant="ghost"
