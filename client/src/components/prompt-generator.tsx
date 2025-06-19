@@ -96,15 +96,6 @@ export default function PromptGenerator() {
   });
 
   const selectedModel = form.watch("model");
-  const customPrompt = form.watch("customPrompt");
-
-  // Auto-populate custom prompt with ideal example when model changes
-  useEffect(() => {
-    if (selectedModel && !customPrompt) {
-      const modelGuidance = getModelGuidance(selectedModel);
-      form.setValue("customPrompt", modelGuidance.idealUserPromptExample);
-    }
-  }, [selectedModel, customPrompt, form]);
 
   const generateMutation = useMutation({
     mutationFn: async (data: GeneratePromptRequest) => {
@@ -271,7 +262,11 @@ export default function PromptGenerator() {
                       </FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="Enter your existing prompt here to optimize it for the selected model..."
+                          placeholder={
+                            selectedModel 
+                              ? `Example for ${selectedModel}: ${getModelGuidance(selectedModel).idealUserPromptExample.split('\n')[0]}...`
+                              : "Enter your existing prompt here to optimize it for the selected model..."
+                          }
                           className="min-h-[100px] resize-none"
                           {...field}
                         />
