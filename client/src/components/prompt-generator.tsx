@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { generatePromptSchema, type GeneratePromptRequest } from "@shared/schema";
+import { generatePromptSchema, generatePromptFormSchema, type GeneratePromptRequest } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,7 +14,9 @@ import type { PromptResponse } from "@/lib/types";
 import ResultsDisplay from "./results-display";
 
 const models = [
-  { value: "gpt-4o", label: "GPT-4o (Latest)" },
+  { value: "o3", label: "o3 (Newest)" },
+  { value: "gpt-4.5", label: "GPT-4.5" },
+  { value: "gpt-4o", label: "GPT-4o" },
   { value: "gpt-4-turbo", label: "GPT-4 Turbo" },
   { value: "gpt-4", label: "GPT-4 (Legacy)" },
   { value: "gpt-4o-mini", label: "GPT-4o Mini" },
@@ -48,12 +50,12 @@ export default function PromptGenerator() {
   const [results, setResults] = useState<PromptResponse | null>(null);
   const { toast } = useToast();
 
-  const form = useForm<GeneratePromptRequest>({
-    resolver: zodResolver(generatePromptSchema),
+  const form = useForm({
+    resolver: zodResolver(generatePromptFormSchema),
     defaultValues: {
-      model: "",
-      taskType: "",
-      tone: "",
+      model: undefined,
+      taskType: undefined,
+      tone: undefined,
     },
   });
 
@@ -78,8 +80,18 @@ export default function PromptGenerator() {
     },
   });
 
-  const onSubmit = (data: GeneratePromptRequest) => {
-    generateMutation.mutate(data);
+  const onSubmit = (data: any) => {
+    // Validate the data with the full schema before submitting
+    const validationResult = generatePromptSchema.safeParse(data);
+    if (validationResult.success) {
+      generateMutation.mutate(validationResult.data);
+    } else {
+      toast({
+        title: "Validation Error",
+        description: "Please fill in all required fields.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleGenerateNew = () => {
@@ -236,7 +248,7 @@ export default function PromptGenerator() {
       {/* Results Display */}
       <ResultsDisplay 
         results={results} 
-        selectedModel={form.watch("model")}
+        selectedModel={form.watch("model") || ""}
         onGenerateNew={handleGenerateNew}
       />
     </div>

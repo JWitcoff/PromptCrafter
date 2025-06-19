@@ -19,6 +19,8 @@ export type User = typeof users.$inferSelect;
 // Prompt generation schemas
 export const generatePromptSchema = z.object({
   model: z.enum([
+    "o3",
+    "gpt-4.5",
     "gpt-4o",
     "gpt-4-turbo", 
     "gpt-4",
@@ -47,6 +49,9 @@ export const generatePromptSchema = z.object({
     "playful"
   ])
 });
+
+// Form schema with optional fields for initial state
+export const generatePromptFormSchema = generatePromptSchema.partial();
 
 export type GeneratePromptRequest = z.infer<typeof generatePromptSchema>;
 

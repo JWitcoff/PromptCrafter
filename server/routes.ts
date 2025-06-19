@@ -37,7 +37,9 @@ Return your response as a JSON object with these exact fields:
 Be concise. Avoid generic tips. Tailor the output precisely to the chosen model and task type.
 
 Model capabilities and behaviors:
-- gpt-4o: Latest model, excellent multimodal reasoning, maintains context well, fast and efficient
+- o3: Newest OpenAI model with advanced reasoning capabilities, strongest performance on complex tasks
+- gpt-4.5: Enhanced version with improved capabilities across all domains
+- gpt-4o: Latest multimodal model, excellent multimodal reasoning, maintains context well, fast and efficient
 - gpt-4-turbo: Strong reasoning, good for complex tasks, handles long contexts
 - gpt-4: Legacy but reliable, excellent for complex reasoning tasks
 - gpt-3.5: Fast and cost-effective, good for simple to moderate tasks
