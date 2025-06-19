@@ -1,0 +1,68 @@
+Build a complete, modern web app that acts as a Prompt Generator for OpenAI models. Use React (with TypeScript), Tailwind CSS, and shadcn/ui components.
+
+The app should act as a prompt engineering assistant trained to generate optimal system and user prompts for OpenAI models.
+
+Its job is to return a perfectly formatted system + user prompt template optimized for the specific model, task, and tone the user selects.
+
+Each result must include:
+1. ✅ System Prompt: The best system message for this use case
+2. ✅ User Prompt: A well-structured, real example of how the user should phrase their query
+3. ✅ Formatting Tips: Bullet-point guidance on how best to format prompts for this model (markdown, delimiters, few-shot support, etc.)
+4. ✅ Behavioral Notes: Known quirks or model-specific behavior to expect
+
+Be concise. Avoid generic tips. Tailor the output precisely to the chosen model.
+
+Supported Models:
+- gpt-4o
+- gpt-4-turbo
+- gpt-4 (legacy)
+- gpt-3.5
+- gpt-4o-mini
+- gpt-3.5-turbo-instruct
+
+Supported Task Types:
+- Summarization
+- Code explanation
+- Email writing
+- Legal reasoning
+- Data extraction
+- Multimodal reasoning
+- Creative writing
+- SQL generation
+- JSON formatting
+- Math/logic proofs
+- Chatbot conversations
+
+Supported Tones:
+- Friendly
+- Formal
+- Technical
+- Direct
+- Playful
+
+---
+
+The app should include:
+
+1. Three input fields:
+   - A dropdown for Model
+   - A dropdown or freeform input for Task Type
+   - A dropdown for Tone
+
+2. A “Generate Prompt” button that:
+   - Calls a backend (via Express or Replit’s serverless route) that passes the inputs to an OpenAI model
+   - Uses a system prompt to generate the 4-part structured response
+
+3. A results display section that:
+   - Clearly shows System Prompt, User Prompt, Formatting Tips, and Behavioral Notes
+   - Uses markdown-friendly UI (e.g. code blocks, bullets, section dividers)
+
+4. UI Styling:
+   - Use Tailwind for layout and spacing
+   - Use shadcn/ui components for form controls, cards, and loading state
+   - Use soft shadows, xl rounded corners, and readable typography
+
+5. Backend:
+   - Set up an Express.js server (or use Replit's API handler) to receive POST requests with model, task, and tone
+   - Call the OpenAI API with the following system prompt:
+
