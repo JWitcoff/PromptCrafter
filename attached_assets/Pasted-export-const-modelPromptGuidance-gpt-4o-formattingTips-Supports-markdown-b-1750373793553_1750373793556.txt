@@ -1,0 +1,77 @@
+export const modelPromptGuidance = {
+  "gpt-4o": {
+    formattingTips: [
+      "Supports markdown, bullet points, and code blocks",
+      "Use clear instructions but natural language is fine",
+      "Specify desired length (it may default to short answers)",
+    ],
+    userPromptNotes: [
+      "Tends to be more conversational unless constrained",
+      "Responds quickly but may compress info unless told to expand",
+    ],
+    idealUserPromptExample: `Summarize the following article using bullet points and simple language. Keep the core ideas but avoid repetition.\n\n[Paste text here]`,
+  },
+
+  "gpt-4-turbo": {
+    formattingTips: [
+      "Prefers clear step-by-step or numbered instructions",
+      "Works well with few-shot formatting (e.g., Input/Output pairs)",
+      "Handles large context windows — great for long prompts",
+    ],
+    userPromptNotes: [
+      "Can be verbose unless told to keep it short",
+      "Respects formatting and tone constraints reliably",
+    ],
+    idealUserPromptExample: `Explain the following code in plain English. Use bullet points and include code snippets for reference.\n\n[Insert code here]`,
+  },
+
+  "gpt-4 (legacy)": {
+    formattingTips: [
+      "Use delimiters like --- or ``` to separate sections",
+      "Be explicit in instructions — prefers structured prompts",
+      "Markdown support is strong, but slower output",
+    ],
+    userPromptNotes: [
+      "Most deliberate reasoning, but also the slowest",
+      "Needs clear scoping to avoid vague responses",
+    ],
+    idealUserPromptExample: `Write a one-paragraph summary of the following legal text. Focus on the constitutional arguments made by each side.\n\n---\n[Insert legal passage here]`,
+  },
+
+  "gpt-3.5": {
+    formattingTips: [
+      "Keep prompts short and literal — no ambiguity",
+      "Use plain instructions and define expected output format",
+      "Wrap examples in delimiters like ``` or === for clarity",
+    ],
+    userPromptNotes: [
+      "Can hallucinate or make confident errors",
+      "Not good at open-ended or abstract tasks",
+    ],
+    idealUserPromptExample: `Extract all email addresses from the following text and return them as a list:\n\n===\n[Paste text here]\n===`,
+  },
+
+  "gpt-3.5-turbo-instruct": {
+    formattingTips: [
+      "Treat like CLI input — concise and directive",
+      "Avoid chatty language — just tell it what to do",
+    ],
+    userPromptNotes: [
+      "Ideal for tools, scripts, or single-turn commands",
+      "No chat history or memory — stateless interaction",
+    ],
+    idealUserPromptExample: `Rewrite this sentence to sound more professional:\n"Hey, I need that report ASAP or we're gonna be in trouble."`,
+  },
+
+  "gpt-4o-mini": {
+    formattingTips: [
+      "Use simple, rule-based language (like a tagger or classifier)",
+      "Avoid creative or open-ended tasks",
+    ],
+    userPromptNotes: [
+      "Optimized for deterministic, fast responses",
+      "Lower quality for nuanced writing or reasoning",
+    ],
+    idealUserPromptExample: `Classify this support request into one of the following categories: Billing, Technical, or Account Access.\n\n[Paste request here]`,
+  },
+}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import type { PromptResponse } from "@/lib/types";
 import ResultsDisplay from "./results-display";
 import { FieldSelectorHoverCard } from "@/components/Tooltips";
+import { getModelGuidance } from "@/lib/modelPromptGuidance";
 
 const models = [
   { 

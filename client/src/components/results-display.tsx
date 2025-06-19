@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Wand2, FileCode, Settings, User, List, Brain, Copy, RefreshCw, CheckCircle2 } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Wand2, FileCode, Settings, User, List, Brain, Copy, RefreshCw, CheckCircle2, ChevronDown, Info } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { PromptResponse } from "@/lib/types";
 import { SystemPromptTooltip, UserPromptTooltip } from "@/components/Tooltips";
+import { getModelGuidance } from "@/lib/modelPromptGuidance";
 
 interface ResultsDisplayProps {
   results: PromptResponse | null;
@@ -14,7 +16,10 @@ interface ResultsDisplayProps {
 
 export default function ResultsDisplay({ results, selectedModel, onGenerateNew }: ResultsDisplayProps) {
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
+  const [isFormattingTipsOpen, setIsFormattingTipsOpen] = useState(false);
   const { toast } = useToast();
+  
+  const modelGuidance = getModelGuidance(selectedModel);
 
   const copyToClipboard = async (text: string, itemName: string) => {
     try {
@@ -143,24 +148,53 @@ export default function ResultsDisplay({ results, selectedModel, onGenerateNew }
                 {results.userPrompt}
               </pre>
             </div>
+            
+            {/* Model-specific User Prompt Notes */}
+            {modelGuidance.userPromptNotes.length > 0 && (
+              <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
+                <div className="flex items-start gap-2">
+                  <Info className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-blue-900 mb-1">Model Behavior Notes</p>
+                    <ul className="text-sm text-blue-800 space-y-1">
+                      {modelGuidance.userPromptNotes.map((note, index) => (
+                        <li key={index} className="flex items-start">
+                          <div className="w-1 h-1 bg-blue-600 rounded-full mt-2 mr-2 flex-shrink-0" />
+                          {note}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Formatting Tips Section */}
+          {/* Model-Specific Formatting Tips Section */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-slate-900 flex items-center">
-              <List className="mr-2 h-4 w-4 text-amber-500" />
-              Formatting Tips
-            </h3>
-            <div className="bg-amber-50 rounded-lg p-4 border border-amber-200">
-              <ul className="text-sm text-amber-800 space-y-2">
-                {results.formattingTips.map((tip, index) => (
-                  <li key={index} className="flex items-start">
-                    <div className="w-1 h-1 bg-amber-600 rounded-full mt-2 mr-2 flex-shrink-0" />
-                    {tip}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <Collapsible open={isFormattingTipsOpen} onOpenChange={setIsFormattingTipsOpen}>
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" className="w-full justify-between p-0 h-auto font-semibold text-sm text-slate-900 hover:bg-transparent">
+                  <div className="flex items-center gap-2">
+                    <List className="h-4 w-4 text-violet-500" />
+                    Formatting Tips for {selectedModel}
+                  </div>
+                  <ChevronDown className={`h-4 w-4 text-slate-500 transition-transform ${isFormattingTipsOpen ? 'rotate-180' : ''}`} />
+                </Button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="space-y-2">
+                <div className="bg-violet-50 rounded-lg p-4 border border-violet-200">
+                  <ul className="text-sm text-violet-800 space-y-1.5">
+                    {modelGuidance.formattingTips.map((tip, index) => (
+                      <li key={index} className="flex items-start">
+                        <div className="w-1 h-1 bg-violet-600 rounded-full mt-2 mr-2 flex-shrink-0" />
+                        {tip}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
           </div>
 
           {/* Behavioral Notes Section */}
