@@ -1,92 +1,139 @@
 export const modelPromptGuidance = {
   "gpt-4o": {
+    systemPrompt: `You are a fast, helpful assistant that responds clearly and efficiently. You adapt to the user's tone and context, while aiming to be brief and easy to understand.
+
+Your responses should:
+- Use plain language
+- Include examples if helpful
+- Be concise by default, unless the user requests detail
+- Respect the structure and style of the user prompt (e.g., bullets, lists, markdown)`,
     formattingTips: [
       "Supports markdown, bullet points, and code blocks",
-      "Use clear instructions but natural language is fine",
-      "Specify desired length (it may default to short answers)",
+      "Use clear natural language; structure is respected but not required",
+      "Specify output length — defaults to short responses if unspecified",
     ],
     userPromptNotes: [
-      "Tends to be more conversational unless constrained",
-      "Responds quickly but may compress info unless told to expand",
+      "Conversational by default — constrain tone for precision",
+      "Fast, but may compress detail unless explicitly told to elaborate",
     ],
-    idealUserPromptExample: `Summarize the following article using bullet points and simple language. Keep the core ideas but avoid repetition.\n\n[Paste text here]`,
+    idealUserPromptExample: `Summarize the following article using bullet points. Keep it simple and clear.\n\n[Paste article here]`,
   },
 
   "gpt-4-turbo": {
+    systemPrompt: `You are a highly structured, analytical assistant optimized for long, multi-step reasoning tasks. You follow formatting precisely and are especially good with examples, steps, and structured outputs.
+
+Your responses should:
+- Follow explicit instructions strictly
+- Use numbered steps or bullet formatting when helpful
+- Be verbose only when clarity requires it
+- Format examples using markdown or delimiter blocks (e.g., "---")`,
     formattingTips: [
-      "Prefers clear step-by-step or numbered instructions",
-      "Works well with few-shot formatting (e.g., Input/Output pairs)",
-      "Handles large context windows — great for long prompts",
+      "Handles long context windows and structured prompts",
+      "Best with numbered steps or few-shot formatting (Input/Output pairs)",
+      "Use markdown or delimiter blocks (e.g., \"---\") to separate examples",
     ],
     userPromptNotes: [
-      "Can be verbose unless told to keep it short",
-      "Respects formatting and tone constraints reliably",
+      "Tends to be verbose unless instructed to be concise",
+      "Very reliable with structured tone, task, and format guidance",
     ],
-    idealUserPromptExample: `Explain the following code in plain English. Use bullet points and include code snippets for reference.\n\n[Insert code here]`,
+    idealUserPromptExample: `Explain the following code step by step. Use bullet points and include comments.\n\n[Insert code here]`,
   },
 
   "gpt-4": {
+    systemPrompt: `You are a formal, deliberate assistant optimized for academic, legal, and highly structured reasoning tasks.
+
+Your responses should:
+- Be clear, methodical, and detailed
+- Use formal tone unless otherwise requested
+- Use structured formatting with clear headers, sections, and supporting points`,
     formattingTips: [
-      "Use delimiters like --- or ``` to separate sections",
-      "Be explicit in instructions — prefers structured prompts",
-      "Markdown support is strong, but slower output",
+      "Use clear delimiters (\"---\", \"```\") for structure",
+      "Structured and verbose prompts preferred",
+      "Strong markdown and LaTeX support",
     ],
     userPromptNotes: [
-      "Most deliberate reasoning, but also the slowest",
-      "Needs clear scoping to avoid vague responses",
+      "Most accurate, but slowest",
+      "Prefers clearly scoped, formal requests",
     ],
-    idealUserPromptExample: `Write a one-paragraph summary of the following legal text. Focus on the constitutional arguments made by each side.\n\n---\n[Insert legal passage here]`,
+    idealUserPromptExample: `Write a formal summary of the following legal passage, focusing on the key constitutional arguments.\n\n---\n[Paste legal text here]`,
   },
 
   "gpt-3.5": {
+    systemPrompt: `You are a fast, literal assistant that excels at executing simple instructions, short-form outputs, and direct transformations.
+
+Your responses should:
+- Follow explicit commands with minimal inference
+- Avoid making assumptions
+- Keep answers short and exact unless otherwise requested`,
     formattingTips: [
-      "Keep prompts short and literal — no ambiguity",
-      "Use plain instructions and define expected output format",
-      "Wrap examples in delimiters like ``` or === for clarity",
+      "Keep instructions literal and unambiguous",
+      "Use examples with clear delimiters (\"```\" or \"===\")",
+      "Avoid open-ended, multi-step logic — keep it simple",
     ],
     userPromptNotes: [
-      "Can hallucinate or make confident errors",
-      "Not good at open-ended or abstract tasks",
+      "May hallucinate or overcommit to false details",
+      "Best for small tasks, regex, short summaries, or template work",
     ],
-    idealUserPromptExample: `Extract all email addresses from the following text and return them as a list:\n\n===\n[Paste text here]\n===`,
+    idealUserPromptExample: `Extract all email addresses from the following block of text and return as a list:\n\n\`\`\`\n[Paste content here]\n\`\`\``,
   },
 
   "gpt-3.5-turbo-instruct": {
+    systemPrompt: `You are an instruction-following assistant optimized for command-style interactions.
+
+Your responses should:
+- Be brief, to the point, and directive
+- Act as if you're powering a tool, script, or API response
+- Avoid unnecessary elaboration or chit-chat`,
     formattingTips: [
-      "Treat like CLI input — concise and directive",
-      "Avoid chatty language — just tell it what to do",
+      "Treat prompts like command-line inputs",
+      "Be concise, directive, and expectation-specific",
     ],
     userPromptNotes: [
-      "Ideal for tools, scripts, or single-turn commands",
-      "No chat history or memory — stateless interaction",
+      "Stateless — no chat history memory",
+      "Best for tools, scripts, single-turn commands",
     ],
-    idealUserPromptExample: `Rewrite this sentence to sound more professional:\n"Hey, I need that report ASAP or we're gonna be in trouble."`,
+    idealUserPromptExample: `Rewrite the following to sound more professional:\n"Hey, I need that report ASAP or we're gonna be in trouble."`,
   },
 
   "gpt-4o-mini": {
+    systemPrompt: `You are a deterministic assistant optimized for tagging, routing, and simple classification tasks.
+
+Your responses should:
+- Be short and rule-based
+- Avoid creative phrasing or elaboration
+- Return only the required output`,
     formattingTips: [
-      "Use simple, rule-based language (like a tagger or classifier)",
-      "Avoid creative or open-ended tasks",
+      "Use task-specific instruction language (\"Classify...\", \"Extract...\")",
+      "No need for tone or style — keep it deterministic",
     ],
     userPromptNotes: [
-      "Optimized for deterministic, fast responses",
-      "Lower quality for nuanced writing or reasoning",
+      "Best for routing, labeling, and tag generation",
+      "Avoid creative or open-ended requests",
     ],
-    idealUserPromptExample: `Classify this support request into one of the following categories: Billing, Technical, or Account Access.\n\n[Paste request here]`,
+    idealUserPromptExample: `Classify this customer message into one of the following categories: [Billing, Technical, Sales]\n\n[Paste message here]`,
   },
 
   // New models with appropriate guidance
   "gpt-4.5": {
+    systemPrompt: `You are a warm, emotionally intelligent assistant who writes short, friendly cold outreach emails designed to build trust and spark conversation — not to sell aggressively.
+
+Your emails are:
+- Conversational and human, not overly formal
+- Under 150 words unless otherwise specified
+- Designed to feel personalized and respectful of the recipient's time
+- Clear about the sender's purpose and call to action, without pressure
+
+Always use a tone that feels like a friendly consultant reaching out — not a marketer.`,
     formattingTips: [
-      "Supports markdown, bullet points, and code blocks",
-      "Use clear instructions but natural language is fine",
-      "Specify desired length (it may default to short answers)",
+      "Optimized for tone and emotional nuance",
+      "Use light formatting and voice guidance (e.g., \"friendly but direct\")",
+      "Works well with subtle structure like soft bulleting or section cues",
     ],
     userPromptNotes: [
-      "Enhanced emotional intelligence and creativity",
-      "Strong at following intent with reduced hallucinations",
+      "Excels at emotionally intelligent writing (outreach, support, education)",
+      "Performs best when tone, audience, and output goal are all defined",
     ],
-    idealUserPromptExample: `Summarize the following article using bullet points and simple language. Keep the core ideas but avoid repetition.\n\n[Paste text here]`,
+    idealUserPromptExample: `Write a friendly, warm cold outreach email introducing [your name] and [your service].\nAudience: [target role or industry]\nGoal: [desired action, e.g., schedule a call]\nKeep it under 150 words.`,
   },
 
   "gpt-4.1": {
