@@ -27,15 +27,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const systemPrompt = customPrompt 
         ? `You are a prompt engineering expert specialized in optimizing and reformatting prompts for OpenAI models.
 
-Your task is to take the user's existing prompt and reformat/optimize it for the specific model, task type, and tone provided.
+Your task is to take the user's existing prompt and transform it into a structured, reusable template with [placeholder] fields optimized for the specific model, task type, and tone provided.
+
+CRITICAL: Even when optimizing existing prompts, create templates with [bracketed placeholders] for all variable content. Transform generic requests into structured, customizable templates.
+
+For example:
+- "Write me a good email" becomes a template with [recipient name], [subject], [company], etc.
+- "Summarize this article" becomes a template with [article title], [key focus areas], [target length], etc.
 
 Return your response as a JSON object with these exact fields:
-- systemPrompt: An optimized system message based on the user's input, tailored for the chosen model
-- userPrompt: The user's prompt rewritten and optimized for best performance with the chosen model
+- systemPrompt: An optimized system message based on the user's intent, tailored for the chosen model
+- userPrompt: A structured template with [placeholders] based on the user's request, optimized for the chosen model
 - formattingTips: Array of specific improvements made and formatting recommendations for this model
 - behavioralNotes: Array of model-specific behavior notes relevant to this optimized prompt
 
-Focus on concrete improvements to the user's original prompt rather than generic advice.
+Transform the user's prompt into a reusable template with clear [placeholder] fields.
 
 Model capabilities and behaviors:
 - gpt-4o: Best all-purpose model, excels at real-time reasoning across text, vision, and audio. Ideal for multimodal tasks, fast response, and tool use
