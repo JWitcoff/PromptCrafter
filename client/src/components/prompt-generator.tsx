@@ -147,7 +147,7 @@ export default function PromptGenerator() {
       {/* Input Form */}
       <div className="space-y-4 sm:space-y-6">
         <Card className="shadow-sm">
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 sm:pt-6 mobile-card-padding">
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-2">
                 <h2 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100">Generate Optimized Prompts</h2>
@@ -174,12 +174,12 @@ export default function PromptGenerator() {
                             <SelectValue placeholder="Select a model..." />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="max-w-sm sm:max-w-md">
+                        <SelectContent className="max-w-sm sm:max-w-md select-content-mobile">
                           {models.map((model) => (
                             <SelectItem key={model.value} value={model.value} className="py-3">
-                              <div className="flex flex-col space-y-1">
+                              <div className="flex flex-col space-y-1 select-item-content">
                                 <span className="font-medium text-sm">{model.label}</span>
-                                <span className="text-xs text-slate-500 leading-relaxed whitespace-normal">
+                                <span className="text-xs text-slate-500 leading-relaxed mobile-responsive-text">
                                   {model.description}
                                 </span>
                               </div>
