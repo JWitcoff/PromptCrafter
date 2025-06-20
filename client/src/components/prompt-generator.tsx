@@ -150,10 +150,10 @@ export default function PromptGenerator() {
           <CardContent className="pt-6">
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-2">
-                <h2 className="text-lg font-semibold text-slate-900">Generate Optimized Prompts</h2>
+                <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Generate Optimized Prompts</h2>
                 <FieldSelectorHoverCard />
               </div>
-              <p className="text-sm text-slate-600">Configure your requirements to get model-specific prompt templates</p>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Configure your requirements to get model-specific prompt templates</p>
             </div>
 
             <Form {...form}>
@@ -164,7 +164,7 @@ export default function PromptGenerator() {
                   name="model"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="flex items-center text-sm font-medium text-slate-700">
+                      <FormLabel className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300">
                         <Cpu className="mr-2 h-4 w-4 text-blue-500" />
                         OpenAI Model
                       </FormLabel>
@@ -198,7 +198,7 @@ export default function PromptGenerator() {
                   name="taskType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="flex items-center text-sm font-medium text-slate-700">
+                      <FormLabel className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300">
                         <ListTodo className="mr-2 h-4 w-4 text-emerald-500" />
                         Task Type
                       </FormLabel>
@@ -227,7 +227,7 @@ export default function PromptGenerator() {
                   name="tone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="flex items-center text-sm font-medium text-slate-700">
+                      <FormLabel className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300">
                         <Palette className="mr-2 h-4 w-4 text-amber-500" />
                         Tone
                       </FormLabel>
@@ -256,7 +256,7 @@ export default function PromptGenerator() {
                   name="customPrompt"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="flex items-center text-sm font-medium text-slate-700">
+                      <FormLabel className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300">
                         <FileText className="mr-2 h-4 w-4 text-purple-500" />
                         Custom Prompt (Optional)
                       </FormLabel>
@@ -271,7 +271,7 @@ export default function PromptGenerator() {
                           {...field}
                         />
                       </FormControl>
-                      <p className="text-xs text-slate-500 mt-1">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                         Leave empty to generate a new template, or paste your prompt to optimize it
                       </p>
                       <FormMessage />
@@ -303,12 +303,12 @@ export default function PromptGenerator() {
         </Card>
 
         {/* Tips Card */}
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200 p-6">
-          <h3 className="text-sm font-medium text-blue-900 mb-3 flex items-center">
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl border border-blue-200 dark:border-blue-800 p-6">
+          <h3 className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-3 flex items-center">
             <Lightbulb className="mr-2 h-4 w-4" />
             Quick Tips
           </h3>
-          <ul className="text-sm text-blue-800 space-y-2">
+          <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-2">
             <li className="flex items-start">
               <CheckCircle className="mr-2 mt-0.5 h-3 w-3 text-blue-500 flex-shrink-0" />
               Each model has unique strengths - choose based on your specific needs

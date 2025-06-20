@@ -93,12 +93,12 @@ ${toneAdjustment.systemPromptModifier}`;
     <div className="space-y-6">
       {/* Results Container */}
       <Card className="shadow-sm overflow-hidden">
-        <div className="border-b border-slate-200 p-6">
-          <h2 className="text-lg font-semibold text-slate-900 flex items-center">
+        <div className="border-b border-slate-200 dark:border-slate-700 p-6">
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100 flex items-center">
             <FileCode className="mr-2 h-5 w-5 text-green-500" />
             Generated Prompts
           </h2>
-          <p className="text-sm text-slate-600 mt-1">
+          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
             Optimized for <span className="font-medium">{selectedModel || "your chosen model"}</span>
           </p>
         </div>
