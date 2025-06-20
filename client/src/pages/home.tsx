@@ -13,7 +13,7 @@ export default function Home() {
               <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
                 <Wand2 className="text-white text-sm" />
               </div>
-              <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">Prompt Generator</h1>
+              <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">PerfectPrompt</h1>
             </div>
             <div className="flex items-center gap-4">
               <a 
