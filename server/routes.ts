@@ -36,7 +36,7 @@ For example:
 - "Summarize this article" becomes a template with [article title], [key focus areas], [target length], etc.
 
 Return your response as a JSON object with these exact fields:
-- systemPrompt: An optimized system message based on the user's intent, tailored for the chosen model
+- systemPrompt: An optimized system message specifically designed for ${model} performing ${taskType} tasks with ${tone} tone
 - userPrompt: A structured template with [placeholders] based on the user's request, optimized for the chosen model
 - formattingTips: Array of specific improvements made and formatting recommendations for this model
 - behavioralNotes: Array of model-specific behavior notes relevant to this optimized prompt
@@ -53,10 +53,12 @@ GPT-3.5: Keep instructions literal and unambiguous. Use examples with clear deli
 
 GPT-4o-mini: Use task-specific instruction language ("Classify...", "Extract..."). No need for tone or style — keep it deterministic. Best for routing, labeling, and tag generation. Avoid creative or open-ended requests.
 
-CRITICAL: Tailor both system and user prompts to match each model's specific strengths and optimal prompting style.`
+CRITICAL: The systemPrompt must be specifically crafted for ${model} model performing ${taskType} tasks with ${tone} tone. Do not use generic system prompts.`
         : `You are a world-class prompt engineering assistant.
 
 Your job is to generate *optimized system and user prompts* tailored to the selected OpenAI model, task type, and tone.
+
+CRITICAL: Create a systemPrompt specifically designed for ${model} performing ${taskType} tasks with ${tone} tone. Each combination should produce a unique, optimized system prompt.
 
 When no specific input context is provided by the user (e.g., no product, persona, or data), return a **general-purpose, editable prompt template** that includes:
 - A clear task description
@@ -67,7 +69,7 @@ When no specific input context is provided by the user (e.g., no product, person
 Do not assume details. Instead, scaffold prompts with clear placeholder text and light formatting that makes customization easy.
 
 Return your response as a JSON object with these exact fields:
-- systemPrompt: The best system message for this use case
+- systemPrompt: A system message specifically optimized for ${model} performing ${taskType} tasks with ${tone} tone
 - userPrompt: A well-structured template with [placeholders] for user customization - MUST include [bracketed placeholders] for all variable content
 - formattingTips: Array of bullet-point guidance on how best to format prompts for this model (markdown, delimiters, few-shot support, etc.)
 - behavioralNotes: Array of known quirks or model-specific behavior to expect

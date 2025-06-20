@@ -26,10 +26,9 @@ export default function ResultsDisplay({ results, selectedModel, selectedTone, o
   
   // Generate dynamic system prompt incorporating tone
   const getDynamicSystemPrompt = () => {
-    const baseSystemPrompt = (modelGuidance as any).systemPrompt || results?.systemPrompt || "";
-    return `${baseSystemPrompt}
-
-${toneAdjustment.systemPromptModifier}`;
+    // Always use the generated system prompt from the API response first
+    // Only fall back to static model guidance if no generated prompt exists
+    return results?.systemPrompt || (modelGuidance as any).systemPrompt || "";
   };
 
   const copyToClipboard = async (text: string, itemName: string) => {
