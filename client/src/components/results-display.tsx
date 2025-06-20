@@ -110,6 +110,11 @@ ${toneAdjustment.systemPromptModifier}`;
               <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                 <Settings className="h-4 w-4 text-blue-500" />
                 System Prompt
+                {selectedTone && (
+                  <span className="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full font-medium">
+                    {selectedTone} tone
+                  </span>
+                )}
                 <SystemPromptTooltip />
               </h3>
               <Button
