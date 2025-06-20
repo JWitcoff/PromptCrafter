@@ -42,7 +42,8 @@ export default function ResultsDisplay({ results, selectedModel, onGenerateNew }
   const copyAllPrompts = () => {
     if (!results) return;
     
-    const allText = `System Prompt:\n${results.systemPrompt}\n\nUser Prompt:\n${results.userPrompt}`;
+    const systemPromptText = modelGuidance.systemPrompt || results.systemPrompt;
+    const allText = `System Prompt:\n${systemPromptText}\n\nUser Prompt:\n${results.userPrompt}`;
     copyToClipboard(allText, "All prompts");
   };
 
@@ -103,7 +104,7 @@ export default function ResultsDisplay({ results, selectedModel, onGenerateNew }
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => copyToClipboard(results.systemPrompt, "System prompt")}
+                onClick={() => copyToClipboard(modelGuidance.systemPrompt || results.systemPrompt, "System prompt")}
                 className="text-xs text-slate-500 hover:text-slate-700"
               >
                 {copiedItem === "System prompt" ? (
@@ -116,7 +117,7 @@ export default function ResultsDisplay({ results, selectedModel, onGenerateNew }
             </div>
             <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
               <pre className="text-sm text-slate-800 whitespace-pre-wrap font-mono">
-                {results.systemPrompt}
+                {modelGuidance.systemPrompt || results.systemPrompt}
               </pre>
             </div>
           </div>
