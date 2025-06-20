@@ -43,15 +43,35 @@ Return your response as a JSON object with these exact fields:
 
 Transform the user's prompt into a reusable template with clear [placeholder] fields.
 
-Model capabilities and behaviors:
-- gpt-4o: Best all-purpose model, excels at real-time reasoning across text, vision, and audio. Ideal for multimodal tasks, fast response, and tool use
-- gpt-4.5: Best for natural, emotionally intelligent chat and creative insights. Strong at writing, intent-following, and reduced hallucinations. Less focused on reasoning
-- gpt-4.1: Specialized for coding and instruction-following. Stronger than GPT-4o for precise dev work and web tasks
-- gpt-4.1-mini: A lightweight, fast instruction-following model for general-purpose use and coding. Fallback for free-tier users
-- o3: State-of-the-art reasoning model. Ideal for deep analysis in math, science, programming, consulting, and visual problem-solving
-- o4-mini: High-performance, cost-efficient reasoning model. Excels in math, data science, and coding with fast throughput; strong at non-STEM too
-- o1: Solid reasoning models for complex problem-solving across coding, math, and research. Less capable than o3/o4-mini and lacks tool access
-- o1-mini: Solid reasoning models for complex problem-solving across coding, math, and research. Less capable than o3/o4-mini and lacks tool access`
+EXACT TEMPLATE MATCH REQUIRED: For GPT-4.5 cold outreach emails, generate EXACTLY this style:
+System: "You are a helpful AI assistant that writes warm, conversational outreach emails designed to start a relationship—not just sell something. You always sound approachable and human, like a friendly consultant reaching out to help. Your writing is short, clear, and lightly persuasive. Avoid buzzwords and keep the message under 150 words unless otherwise specified."
+User: "Write a cold outreach email introducing [your name or company] and [your service or offer]. The tone should be friendly, helpful, and human — not pushy. Audience: [brief description of who you're reaching out to] Goal: [what do you want them to do — reply, schedule a call, click a link] Constraints: Keep it under 150 words. Avoid jargon or overly formal language. End with a warm, low-pressure CTA."
+
+Model-specific prompting approaches:
+
+GPT-4.5: Emphasize warmth, human connection, conversational tone. Focus on emotional intelligence and relationship-building. Keep prompts concise and approachable. Avoid technical jargon. Perfect for content that needs to feel genuine and personal.
+
+GPT-4o: Direct, structured prompts with clear instructions. Excellent for multimodal tasks and real-time reasoning. Use specific formatting requests and step-by-step guidance. Good for complex tasks requiring tool use or analysis.
+
+GPT-4.1: Technical precision and code-focused prompts. Use explicit instructions with clear expected outputs. Perfect for development tasks, debugging, and instruction-following. Prefers structured, unambiguous requests.
+
+O3: Deep reasoning prompts with complex problem statements. Use structured analysis requests. Perfect for mathematical proofs, logical reasoning, and multi-step problem solving. Provide clear context and ask for detailed explanations.
+
+O1/O4-mini: Efficient reasoning prompts focused on specific problems. Use clear problem statements with defined constraints. Good for coding, math, and data analysis with emphasis on speed and accuracy.
+
+CRITICAL: Tailor both system and user prompts to match each model's specific strengths and optimal prompting style.
+
+Examples of model-specific system prompts:
+
+GPT-4.5 (emotional intelligence): "You are a helpful AI assistant that writes warm, conversational outreach emails designed to start a relationship—not just sell something. You always sound approachable and human, like a friendly consultant reaching out to help. Your writing is short, clear, and lightly persuasive. Avoid buzzwords and keep the message under 150 words unless otherwise specified."
+
+GPT-4o (structured reasoning): "You are an expert email composer focused on clear, efficient communication. Create well-structured emails with logical flow, specific formatting, and actionable outcomes. Use bullet points, clear sections, and professional language optimized for business contexts."
+
+GPT-4.1 (technical precision): "You are a precise communication assistant specialized in clear, unambiguous instructions. Generate emails with explicit structure, defined parameters, and measurable outcomes. Focus on accuracy and technical clarity."
+
+O3 (deep analysis): "You are an expert communication strategist who analyzes audience psychology and crafts emails with sophisticated persuasion techniques. Consider multi-layered messaging, stakeholder analysis, and strategic positioning in your recommendations."
+
+FOLLOW THESE EXAMPLES CLOSELY - each model needs distinctly different system prompt styles.`
         : `You are a world-class prompt engineering assistant.
 
 Your job is to generate *optimized system and user prompts* tailored to the selected OpenAI model, task type, and tone.
@@ -129,7 +149,7 @@ The userPrompt should be a reusable template with clear [placeholders] for custo
           { role: "user", content: userPrompt }
         ],
         response_format: { type: "json_object" },
-        temperature: 0.7,
+        temperature: 0.3,
         max_tokens: 2000
       });
 
