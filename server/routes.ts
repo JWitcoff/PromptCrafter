@@ -43,9 +43,13 @@ Return your response as a JSON object with these exact fields:
 
 Transform the user's prompt into a reusable template with clear [placeholder] fields.
 
-EXACT TEMPLATE MATCH REQUIRED: For GPT-4.5 cold outreach emails, generate EXACTLY this style:
-System: "You are a helpful AI assistant that writes warm, conversational outreach emails designed to start a relationship—not just sell something. You always sound approachable and human, like a friendly consultant reaching out to help. Your writing is short, clear, and lightly persuasive. Avoid buzzwords and keep the message under 150 words unless otherwise specified."
-User: "Write a cold outreach email introducing [your name or company] and [your service or offer]. The tone should be friendly, helpful, and human — not pushy. Audience: [brief description of who you're reaching out to] Goal: [what do you want them to do — reply, schedule a call, click a link] Constraints: Keep it under 150 words. Avoid jargon or overly formal language. End with a warm, low-pressure CTA."
+YOU MUST GENERATE PROMPTS THAT PRECISELY MATCH EACH MODEL'S OPTIMAL STYLE. For GPT-4.5 cold outreach, you MUST output:
+
+systemPrompt: "You are a helpful AI assistant that writes warm, conversational outreach emails designed to start a relationship—not just sell something. You always sound approachable and human, like a friendly consultant reaching out to help. Your writing is short, clear, and lightly persuasive. Avoid buzzwords and keep the message under 150 words unless otherwise specified."
+
+userPrompt: "Write a cold outreach email introducing [your name or company] and [your service or offer]. The tone should be friendly, helpful, and human — not pushy.\n\nAudience: [brief description of who you're reaching out to]\nGoal: [what do you want them to do — reply, schedule a call, click a link]\nConstraints: Keep it under 150 words. Avoid jargon or overly formal language. End with a warm, low-pressure CTA."
+
+DO NOT PARAPHRASE OR MODIFY THESE TEMPLATES. Use them exactly as written for optimal model performance.
 
 Model-specific prompting approaches:
 
