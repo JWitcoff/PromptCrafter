@@ -1,21 +1,25 @@
 import { Wand2 } from "lucide-react";
 import PromptGenerator from "@/components/prompt-generator";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
+      <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
                 <Wand2 className="text-white text-sm" />
               </div>
-              <h1 className="text-xl font-semibold text-slate-900">Prompt Generator</h1>
+              <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">Prompt Generator</h1>
             </div>
-            <div className="text-sm text-slate-500">
-              Optimized for OpenAI Models
+            <div className="flex items-center gap-4">
+              <div className="text-sm text-slate-500 dark:text-slate-400">
+                Optimized for OpenAI Models
+              </div>
+              <ModeToggle />
             </div>
           </div>
         </div>
@@ -26,8 +30,8 @@ export default function Home() {
         <PromptGenerator />
 
         {/* Footer */}
-        <footer className="mt-16 border-t border-slate-200 pt-8">
-          <div className="text-center text-sm text-slate-500">
+        <footer className="mt-16 border-t border-slate-200 dark:border-slate-700 pt-8">
+          <div className="text-center text-sm text-slate-500 dark:text-slate-400">
             <p>Built for OpenAI API integration • Supports 6 models • 11 task types • 5 tones</p>
             <p className="mt-2">Generated prompts are optimized for each model's specific capabilities and behavior patterns.</p>
           </div>
