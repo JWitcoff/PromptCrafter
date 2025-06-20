@@ -1,0 +1,104 @@
+export const modelPromptGuidance = {
+  "gpt-4o": {
+    formattingTips: [
+      "Supports markdown, bullet points, and code blocks",
+      "Use clear natural language; structure is respected but not required",
+      "Specify output length — defaults to short responses if unspecified"
+    ],
+    userPromptNotes: [
+      "Conversational by default — constrain tone for precision",
+      "Fast, but may compress detail unless explicitly told to elaborate"
+    ],
+    bestUseCases: "Conversational tasks, image or audio reasoning, fast text generation",
+    idealUserPromptExample:
+      "Summarize the following article using bullet points. Keep it simple and clear.\n\n[Paste article here]"
+  },
+
+  "gpt-4-turbo": {
+    formattingTips: [
+      "Handles long context windows and structured prompts",
+      "Best with numbered steps or few-shot formatting (Input/Output pairs)",
+      "Use markdown or delimiter blocks (e.g., \"---\") to separate examples"
+    ],
+    userPromptNotes: [
+      "Tends to be verbose unless instructed to be concise",
+      "Very reliable with structured tone, task, and format guidance"
+    ],
+    bestUseCases: "Technical writing, long document processing, few-shot examples",
+    idealUserPromptExample:
+      "Explain the following code step by step. Use bullet points and include comments.\n\n[Insert code here]"
+  },
+
+  "gpt-4": {
+    formattingTips: [
+      "Use clear delimiters (\"---\", \"```\") for structure",
+      "Structured and verbose prompts preferred",
+      "Strong markdown and LaTeX support"
+    ],
+    userPromptNotes: [
+      "Most accurate, but slowest",
+      "Prefers clearly scoped, formal requests"
+    ],
+    bestUseCases: "Legal summaries, step-by-step math, formal reasoning",
+    idealUserPromptExample:
+      "Write a formal summary of the following legal passage, focusing on the key constitutional arguments.\n\n---\n[Paste legal text here]"
+  },
+
+  "gpt-4.5": {
+    formattingTips: [
+      "Optimized for tone and emotional nuance",
+      "Use light formatting and voice guidance (e.g., \"friendly but direct\")",
+      "Works well with subtle structure like soft bulleting or section cues"
+    ],
+    userPromptNotes: [
+      "Excels at emotionally intelligent writing (outreach, support, education)",
+      "Performs best when tone, audience, and output goal are all defined"
+    ],
+    bestUseCases: "Cold outreach, empathetic messaging, conversational writing",
+    idealUserPromptExample:
+      "Write a friendly, warm cold outreach email introducing [your name] and [your service].\nAudience: [target role or industry]\nGoal: [desired action, e.g., schedule a call]\nKeep it under 150 words."
+  },
+
+  "gpt-3.5": {
+    formattingTips: [
+      "Keep instructions literal and unambiguous",
+      "Use examples with clear delimiters (\"```\" or \"===\")",
+      "Avoid open-ended, multi-step logic — keep it simple"
+    ],
+    userPromptNotes: [
+      "May hallucinate or overcommit to false details",
+      "Best for small tasks, regex, short summaries, or template work"
+    ],
+    bestUseCases: "Text cleanup, regex, extraction, short summaries",
+    idealUserPromptExample:
+      "Extract all email addresses from the following block of text and return as a list:\n\n```\n[Paste content here]\n```"
+  },
+
+  "gpt-3.5-turbo-instruct": {
+    formattingTips: [
+      "Treat prompts like command-line inputs",
+      "Be concise, directive, and expectation-specific"
+    ],
+    userPromptNotes: [
+      "Stateless — no chat history memory",
+      "Best for tools, scripts, single-turn commands"
+    ],
+    bestUseCases: "Code refactors, one-shot rewrites, literal editing",
+    idealUserPromptExample:
+      "Rewrite the following to sound more professional:\n\"Hey, I need that report ASAP or we're gonna be in trouble.\""
+  },
+
+  "gpt-4o-mini": {
+    formattingTips: [
+      "Use task-specific instruction language (\"Classify...\", \"Extract...\")",
+      "No need for tone or style — keep it deterministic"
+    ],
+    userPromptNotes: [
+      "Best for routing, labeling, and tag generation",
+      "Avoid creative or open-ended requests"
+    ],
+    bestUseCases: "Tagging, classification, rule-based extraction",
+    idealUserPromptExample:
+      "Classify this customer message into one of the following categories: [Billing, Technical, Sales]\n\n[Paste message here]"
+  }
+};
