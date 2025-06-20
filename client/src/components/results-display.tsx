@@ -7,19 +7,30 @@ import { useToast } from "@/hooks/use-toast";
 import type { PromptResponse } from "@/lib/types";
 import { SystemPromptTooltip, UserPromptTooltip } from "@/components/Tooltips";
 import { getModelGuidance } from "@/lib/modelPromptGuidance";
+import { getToneAdjustment } from "@/lib/toneAdjustments";
 
 interface ResultsDisplayProps {
   results: PromptResponse | null;
   selectedModel: string;
+  selectedTone: string;
   onGenerateNew: () => void;
 }
 
-export default function ResultsDisplay({ results, selectedModel, onGenerateNew }: ResultsDisplayProps) {
+export default function ResultsDisplay({ results, selectedModel, selectedTone, onGenerateNew }: ResultsDisplayProps) {
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
   const [isFormattingTipsOpen, setIsFormattingTipsOpen] = useState(false);
   const { toast } = useToast();
   
   const modelGuidance = getModelGuidance(selectedModel);
+  const toneAdjustment = getToneAdjustment(selectedTone);
+  
+  // Generate dynamic system prompt incorporating tone
+  const getDynamicSystemPrompt = () => {
+    const baseSystemPrompt = (modelGuidance as any).systemPrompt || results?.systemPrompt || "";
+    return `${baseSystemPrompt}
+
+${toneAdjustment.systemPromptModifier}`;
+  };
 
   const copyToClipboard = async (text: string, itemName: string) => {
     try {
@@ -42,7 +53,7 @@ export default function ResultsDisplay({ results, selectedModel, onGenerateNew }
   const copyAllPrompts = () => {
     if (!results) return;
     
-    const systemPromptText = (modelGuidance as any).systemPrompt || results.systemPrompt;
+    const systemPromptText = getDynamicSystemPrompt();
     const allText = `System Prompt:\n${systemPromptText}\n\nUser Prompt:\n${results.userPrompt}`;
     copyToClipboard(allText, "All prompts");
   };
@@ -104,7 +115,7 @@ export default function ResultsDisplay({ results, selectedModel, onGenerateNew }
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => copyToClipboard((modelGuidance as any).systemPrompt || results.systemPrompt, "System prompt")}
+                onClick={() => copyToClipboard(getDynamicSystemPrompt(), "System prompt")}
                 className="text-xs text-slate-500 hover:text-slate-700"
               >
                 {copiedItem === "System prompt" ? (
@@ -117,7 +128,7 @@ export default function ResultsDisplay({ results, selectedModel, onGenerateNew }
             </div>
             <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
               <pre className="text-sm text-slate-800 whitespace-pre-wrap font-mono">
-                {(modelGuidance as any).systemPrompt || results.systemPrompt}
+                {getDynamicSystemPrompt()}
               </pre>
             </div>
           </div>

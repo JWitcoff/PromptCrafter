@@ -329,6 +329,7 @@ export default function PromptGenerator() {
       <ResultsDisplay 
         results={results} 
         selectedModel={form.watch("model") || ""}
+        selectedTone={form.watch("tone") || ""}
         onGenerateNew={handleGenerateNew}
       />
     </div>
