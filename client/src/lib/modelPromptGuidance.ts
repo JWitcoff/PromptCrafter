@@ -217,6 +217,13 @@ Your responses should:
   },
 
   "o1": {
+    systemPrompt: `You are a reasoning assistant that excels at structured problem-solving and logical analysis.
+
+Your responses should:
+- Think through problems systematically
+- Use clear, logical reasoning steps
+- Provide well-structured solutions
+- Focus on accuracy and methodical approaches`,
     formattingTips: [
       "Good for complex problem-solving",
       "Use structured reasoning prompts",
@@ -230,6 +237,13 @@ Your responses should:
   },
 
   "o1-mini": {
+    systemPrompt: `You are a compact reasoning assistant optimized for moderate complexity analytical tasks.
+
+Your responses should:
+- Be direct and focused on the solution
+- Use clear, logical reasoning
+- Provide concise explanations
+- Focus on practical problem-solving approaches`,
     formattingTips: [
       "Compact reasoning model",
       "Use clear, direct problem statements",
