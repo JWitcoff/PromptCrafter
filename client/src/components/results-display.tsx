@@ -107,11 +107,11 @@ ${toneAdjustment.systemPromptModifier}`;
           {/* System Prompt Section */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                 <Settings className="h-4 w-4 text-blue-500" />
                 System Prompt
                 {selectedTone && (
-                  <span className="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full font-medium">
+                  <span className="text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-200 px-2 py-1 rounded-full font-medium">
                     {selectedTone} tone
                   </span>
                 )}
@@ -131,8 +131,8 @@ ${toneAdjustment.systemPromptModifier}`;
                 Copy
               </Button>
             </div>
-            <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-              <pre className="text-sm text-slate-800 whitespace-pre-wrap font-mono">
+            <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
+              <pre className="text-sm text-slate-800 dark:text-slate-200 whitespace-pre-wrap font-mono">
                 {getDynamicSystemPrompt()}
               </pre>
             </div>
@@ -141,7 +141,7 @@ ${toneAdjustment.systemPromptModifier}`;
           {/* User Prompt Section */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                 <User className="h-4 w-4 text-emerald-500" />
                 User Prompt Template
                 <UserPromptTooltip />
@@ -160,20 +160,20 @@ ${toneAdjustment.systemPromptModifier}`;
                 Copy
               </Button>
             </div>
-            <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-              <pre className="text-sm text-slate-800 whitespace-pre-wrap font-mono">
+            <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
+              <pre className="text-sm text-slate-800 dark:text-slate-200 whitespace-pre-wrap font-mono">
                 {results.userPrompt}
               </pre>
             </div>
             
             {/* Model-specific User Prompt Notes */}
             {modelGuidance.userPromptNotes.length > 0 && (
-              <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-200 dark:border-blue-800">
                 <div className="flex items-start gap-2">
-                  <Info className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <Info className="h-4 w-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                   <div>
-                    <p className="text-sm font-medium text-blue-900 mb-1">Model Behavior Notes</p>
-                    <ul className="text-sm text-blue-800 space-y-1">
+                    <p className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-1">Model Behavior Notes</p>
+                    <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
                       {modelGuidance.userPromptNotes.map((note, index) => (
                         <li key={index} className="flex items-start">
                           <div className="w-1 h-1 bg-blue-600 rounded-full mt-2 mr-2 flex-shrink-0" />
@@ -191,20 +191,20 @@ ${toneAdjustment.systemPromptModifier}`;
           <div className="space-y-3">
             <Collapsible open={isFormattingTipsOpen} onOpenChange={setIsFormattingTipsOpen}>
               <CollapsibleTrigger asChild>
-                <Button variant="ghost" className="w-full justify-between p-0 h-auto font-semibold text-sm text-slate-900 hover:bg-transparent">
+                <Button variant="ghost" className="w-full justify-between p-0 h-auto font-semibold text-sm text-slate-900 dark:text-slate-100 hover:bg-transparent">
                   <div className="flex items-center gap-2">
                     <List className="h-4 w-4 text-violet-500" />
                     Formatting Tips for {selectedModel}
                   </div>
-                  <ChevronDown className={`h-4 w-4 text-slate-500 transition-transform ${isFormattingTipsOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`h-4 w-4 text-slate-500 dark:text-slate-400 transition-transform ${isFormattingTipsOpen ? 'rotate-180' : ''}`} />
                 </Button>
               </CollapsibleTrigger>
               <CollapsibleContent className="space-y-2">
-                <div className="bg-violet-50 rounded-lg p-4 border border-violet-200">
-                  <ul className="text-sm text-violet-800 space-y-1.5">
+                <div className="bg-violet-50 dark:bg-violet-900/20 rounded-lg p-4 border border-violet-200 dark:border-violet-800">
+                  <ul className="text-sm text-violet-800 dark:text-violet-200 space-y-1.5">
                     {modelGuidance.formattingTips.map((tip, index) => (
                       <li key={index} className="flex items-start">
-                        <div className="w-1 h-1 bg-violet-600 rounded-full mt-2 mr-2 flex-shrink-0" />
+                        <div className="w-1 h-1 bg-violet-600 dark:bg-violet-400 rounded-full mt-2 mr-2 flex-shrink-0" />
                         {tip}
                       </li>
                     ))}
@@ -216,15 +216,15 @@ ${toneAdjustment.systemPromptModifier}`;
 
           {/* Behavioral Notes Section */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-slate-900 flex items-center">
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 flex items-center">
               <Brain className="mr-2 h-4 w-4 text-purple-500" />
               Behavioral Notes
             </h3>
-            <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
-              <ul className="text-sm text-purple-800 space-y-2">
+            <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
+              <ul className="text-sm text-purple-800 dark:text-purple-200 space-y-2">
                 {results.behavioralNotes.map((note, index) => (
                   <li key={index} className="flex items-start">
-                    <div className="w-1 h-1 bg-purple-600 rounded-full mt-2 mr-2 flex-shrink-0" />
+                    <div className="w-1 h-1 bg-purple-600 dark:bg-purple-400 rounded-full mt-2 mr-2 flex-shrink-0" />
                     {note}
                   </li>
                 ))}
@@ -233,7 +233,7 @@ ${toneAdjustment.systemPromptModifier}`;
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-200">
+          <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-200 dark:border-slate-700">
             <Button
               onClick={copyAllPrompts}
               className="flex-1 bg-green-500 hover:bg-green-600 text-white"
