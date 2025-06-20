@@ -143,17 +143,17 @@ export default function PromptGenerator() {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
       {/* Input Form */}
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         <Card className="shadow-sm">
           <CardContent className="pt-6">
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-2">
-                <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Generate Optimized Prompts</h2>
+                <h2 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100">Generate Optimized Prompts</h2>
                 <FieldSelectorHoverCard />
               </div>
-              <p className="text-sm text-slate-600 dark:text-slate-400">Configure your requirements to get model-specific prompt templates</p>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Configure your requirements to get model-specific prompt templates</p>
             </div>
 
             <Form {...form}>
@@ -174,12 +174,12 @@ export default function PromptGenerator() {
                             <SelectValue placeholder="Select a model..." />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="max-w-md">
+                        <SelectContent className="max-w-sm sm:max-w-md">
                           {models.map((model) => (
                             <SelectItem key={model.value} value={model.value} className="py-3">
                               <div className="flex flex-col space-y-1">
                                 <span className="font-medium text-sm">{model.label}</span>
-                                <span className="text-xs text-slate-500 leading-relaxed">
+                                <span className="text-xs text-slate-500 leading-relaxed whitespace-normal">
                                   {model.description}
                                 </span>
                               </div>

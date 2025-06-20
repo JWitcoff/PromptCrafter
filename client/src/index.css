@@ -57,3 +57,31 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
+
+@layer components {
+  /* Mobile optimizations for select dropdown content */
+  .select-content-mobile {
+    max-width: calc(100vw - 2rem);
+    width: auto;
+  }
+  
+  /* Ensure text wrapping in select items */
+  .select-item-content {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Mobile responsive adjustments */
+  @media (max-width: 640px) {
+    .mobile-responsive-text {
+      font-size: 0.75rem;
+      line-height: 1.25;
+    }
+    
+    .mobile-card-padding {
+      padding: 1rem;
+    }
+  }
+}
