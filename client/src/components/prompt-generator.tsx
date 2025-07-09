@@ -71,6 +71,7 @@ const taskTypes = [
   { value: "json-formatting", label: "JSON Formatting" },
   { value: "math-logic-proofs", label: "Math/Logic Proofs" },
   { value: "chatbot-conversations", label: "Chatbot Conversations" },
+  { value: "other", label: "Other (Custom Request)" },
 ];
 
 const tones = [
@@ -96,6 +97,7 @@ export default function PromptGenerator() {
   });
 
   const selectedModel = form.watch("model");
+  const selectedTaskType = form.watch("taskType");
 
   const generateMutation = useMutation({
     mutationFn: async (data: GeneratePromptRequest) => {
@@ -119,6 +121,16 @@ export default function PromptGenerator() {
   });
 
   const onSubmit = (data: any) => {
+    // Additional validation for "other" task type
+    if (data.taskType === "other" && (!data.customPrompt || data.customPrompt.trim() === "")) {
+      toast({
+        title: "Custom Request Required",
+        description: "Please describe your custom request when selecting 'Other' task type.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     // Validate the data with the full schema before submitting
     const validationResult = generatePromptSchema.safeParse(data);
     if (validationResult.success) {
@@ -250,34 +262,32 @@ export default function PromptGenerator() {
                   )}
                 />
 
-                {/* Custom Prompt Input */}
-                <FormField
-                  control={form.control}
-                  name="customPrompt"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300">
-                        <FileText className="mr-2 h-4 w-4 text-purple-500" />
-                        Custom Prompt (Optional)
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder={
-                            selectedModel 
-                              ? `Example for ${selectedModel}: ${getModelGuidance(selectedModel).idealUserPromptExample.split('\n')[0]}...`
-                              : "Enter your existing prompt here to optimize it for the selected model..."
-                          }
-                          className="min-h-[100px] resize-none"
-                          {...field}
-                        />
-                      </FormControl>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                        Leave empty to generate a new template, or paste your prompt to optimize it
-                      </p>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                {/* Custom Request Input - Only show when "other" is selected */}
+                {selectedTaskType === "other" && (
+                  <FormField
+                    control={form.control}
+                    name="customPrompt"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300">
+                          <FileText className="mr-2 h-4 w-4 text-purple-500" />
+                          Describe Your Custom Request
+                        </FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Example: 'Craft me the perfect prompt to build a simple task manager' or 'Help me write prompts for a customer support chatbot that handles billing inquiries'"
+                            className="min-h-[120px] resize-none"
+                            {...field}
+                          />
+                        </FormControl>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                          Describe what you want to achieve, and we'll determine the optimal prompt type and structure for your selected model.
+                        </p>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
 
                 {/* Generate Button */}
                 <Button 

@@ -39,7 +39,8 @@ export const generatePromptSchema = z.object({
     "sql-generation",
     "json-formatting",
     "math-logic-proofs",
-    "chatbot-conversations"
+    "chatbot-conversations",
+    "other"
   ]),
   tone: z.enum([
     "friendly",

@@ -23,8 +23,47 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const { model, taskType, tone, customPrompt } = validation.data;
 
+      // Special handling for "other" task type - analyze the custom prompt to determine optimal approach
+      const effectiveTaskType = taskType === "other" && customPrompt 
+        ? "custom-analysis" 
+        : taskType;
+
       // System prompt for the OpenAI API to generate optimized prompts
-      const systemPrompt = customPrompt 
+      const systemPrompt = taskType === "other" && customPrompt
+        ? `You are a prompt engineering expert specialized in analyzing user requests and creating optimal prompts for OpenAI models.
+
+Your task is to:
+1. Analyze the user's custom request: "${customPrompt}"
+2. Determine the most appropriate prompt structure and approach
+3. Create optimized system and user prompts tailored specifically for ${model} with ${tone} tone
+
+CRITICAL: Based on the user's request, intelligently determine the best prompt engineering approach. This could involve:
+- Content generation (if they want to create something)
+- Analysis tasks (if they want to analyze or understand something) 
+- Problem-solving (if they want help with a specific challenge)
+- Automation/tools (if they want to build something functional)
+- Communication (if they want help with writing/messaging)
+
+Return your response as a JSON object with these exact fields:
+- systemPrompt: A system message specifically optimized for ${model} to handle the user's request with ${tone} tone
+- userPrompt: A structured template with [placeholders] that addresses the user's specific need while remaining reusable
+- formattingTips: Array of model-specific formatting recommendations for this type of request
+- behavioralNotes: Array of model-specific behavior notes relevant to this use case
+
+Model-specific guidance for ${model}:
+
+GPT-4o: Supports markdown, bullet points, and code blocks. Use clear natural language; structure is respected but not required. Specify output length — defaults to short responses if unspecified. Conversational by default — constrain tone for precision. Fast, but may compress detail unless explicitly told to elaborate.
+
+GPT-4.5: Optimized for tone and emotional nuance. Use light formatting and voice guidance. Works well with subtle structure like soft bulleting or section cues. Excels at emotionally intelligent writing. Performs best when tone, audience, and output goal are all defined.
+
+GPT-4.1: Specialized for coding and instruction-following. Stronger for precise development work and web tasks. Benefits from clear, structured instructions.
+
+O3/O1: State-of-the-art reasoning models. Ideal for deep analysis, complex problem-solving, math, science, programming, and visual problem-solving.
+
+O4-mini/O1-mini: High-performance, cost-efficient reasoning models. Excel in math, data science, and coding with fast throughput.
+
+CRITICAL: Create prompts that directly address the user's specific request while being optimized for ${model} and ${tone} tone.`
+        : customPrompt 
         ? `You are a prompt engineering expert specialized in optimizing and reformatting prompts for OpenAI models.
 
 Your task is to take the user's existing prompt and transform it into a structured, reusable template with [placeholder] fields optimized for the specific model, task type, and tone provided.
@@ -90,7 +129,18 @@ GPT-4o-mini: Use task-specific instruction language ("Classify...", "Extract..."
 
 CRITICAL: Tailor both system and user prompts to match each model's specific strengths and optimal prompting style.`;
 
-      const userPrompt = customPrompt 
+      const userPrompt = taskType === "other" && customPrompt
+        ? `Analyze this custom request and create the perfect prompt structure:
+
+User's Request: "${customPrompt}"
+
+Requirements:
+- Target Model: ${model}
+- Desired Tone: ${tone}
+- Must be reusable with [placeholders]
+
+Based on this request, determine the optimal prompt engineering approach and create both system and user prompts that will help the user achieve their goal effectively.`
+        : customPrompt 
         ? `Please optimize and reformat this user prompt for the ${model} model:
 
 Original prompt: "${customPrompt}"
