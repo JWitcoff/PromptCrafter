@@ -23,6 +23,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const { model, taskType, tone, customPrompt } = validation.data;
 
+      // Validate that customPrompt is provided when taskType is "other"
+      if (taskType === "other" && (!customPrompt || customPrompt.trim().length === 0)) {
+        return res.status(400).json({ 
+          message: "Custom description is required when task type is 'Other'",
+          errors: [{ 
+            path: ["customPrompt"], 
+            message: "Custom description is required for 'Other' task type" 
+          }] 
+        });
+      }
+
       // Special handling for "other" task type - analyze the custom prompt to determine optimal approach
       const effectiveTaskType = taskType === "other" && customPrompt 
         ? "custom-analysis" 
