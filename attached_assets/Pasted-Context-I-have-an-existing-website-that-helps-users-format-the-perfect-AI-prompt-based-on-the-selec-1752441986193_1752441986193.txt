@@ -1,0 +1,28 @@
+Context:
+I have an existing website that helps users format the perfect AI prompt based on the selected GPT model (GPT-4o, GPT-4-turbo, GPT-3.5, etc.). Currently, users first select their desired model and then enter their task to receive an optimized prompt.
+Objective:
+Modify the existing flow so that users:
+First, input their task or use case description (what they want the AI to do).
+Then, receive a recommended GPT model based on their task.
+Clearly indicate why this model is recommended (e.g., cost efficiency, speed, accuracy, complexity handling).
+Allow the user to review other models and select an alternative if desired, accompanied by brief, helpful descriptions of each model.
+Finally, after the model is selected (recommended or otherwise), generate and display the optimized prompt specific to their task and the selected model.
+Implementation Requirements:
+Add an initial input field for users to describe their tasks clearly.
+Build a simple backend logic (rule-based is fine for now) to recommend models based on keywords, task complexity, response length needed, and sensitivity to accuracy vs. cost vs. speed.
+Provide a clean, user-friendly interface that explicitly shows:
+Recommended model with justification.
+Option to override the recommendation, with concise summaries of other available models (strengths, weaknesses, use cases).
+Retain existing functionality to generate and display the optimized prompt after the final model selection step.
+Deliverables:
+Update the current frontend components to reflect the new workflow:
+Task description input → Model recommendation/selection → Prompt generation.
+Backend logic (simple rule-based recommendation engine) clearly defined and easily extensible.
+Example User Flow (to illustrate):
+User inputs: "Summarize lengthy legal contracts clearly and concisely."
+System recommends: GPT-4o, noting:
+"Recommended for complex tasks that require nuanced understanding and high accuracy."
+User reviews other models (optional):
+GPT-3.5: Faster and cheaper, ideal for simpler, shorter tasks.
+GPT-4-turbo: Balanced performance, suitable for moderately complex tasks with speed.
+User confirms GPT-4o or selects an alternative → Site generates optimized prompt.
