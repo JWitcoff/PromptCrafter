@@ -65,3 +65,40 @@ export const promptResponseSchema = z.object({
 });
 
 export type PromptResponse = z.infer<typeof promptResponseSchema>;
+
+// New schemas for task-first workflow
+export const taskAnalysisSchema = z.object({
+  taskDescription: z.string().min(10, "Please provide a detailed task description (at least 10 characters)")
+});
+
+export type TaskAnalysisRequest = z.infer<typeof taskAnalysisSchema>;
+
+export const modelRecommendationSchema = z.object({
+  recommendedModel: z.string(),
+  confidence: z.number().min(0).max(1),
+  reasoning: z.string(),
+  taskComplexity: z.enum(["simple", "moderate", "complex"]),
+  alternatives: z.array(z.object({
+    model: z.string(),
+    reason: z.string(),
+    pros: z.array(z.string()),
+    cons: z.array(z.string())
+  }))
+});
+
+export type ModelRecommendation = z.infer<typeof modelRecommendationSchema>;
+
+// Updated prompt generation schema for task-first flow
+export const taskFirstPromptSchema = z.object({
+  taskDescription: z.string().min(1),
+  selectedModel: z.string(),
+  tone: z.enum([
+    "friendly",
+    "formal", 
+    "technical",
+    "direct",
+    "playful"
+  ])
+});
+
+export type TaskFirstPromptRequest = z.infer<typeof taskFirstPromptSchema>;

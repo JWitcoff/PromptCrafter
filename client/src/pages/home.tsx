@@ -1,5 +1,5 @@
 import { Wand2, ExternalLink } from "lucide-react";
-import PromptGenerator from "@/components/prompt-generator";
+import TaskFirstGenerator from "@/components/task-first-generator";
 import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Home() {
@@ -42,13 +42,13 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
-        <PromptGenerator />
+        <TaskFirstGenerator />
 
         {/* Footer */}
         <footer className="mt-8 sm:mt-16 border-t border-slate-200 dark:border-slate-700 pt-6 sm:pt-8">
           <div className="text-center text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-            <p className="break-words">Built for OpenAI API integration • Supports 8 models • 12 task types • 6 tones</p>
-            <p className="mt-2 px-2">Generated prompts are optimized for each model's specific capabilities and behavior patterns.</p>
+            <p className="break-words">Task-First AI Prompt Generator • Intelligent Model Recommendations • 8 Models • 6 Tones</p>
+            <p className="mt-2 px-2">Describe your task and get the perfect model recommendation with optimized prompts tailored to your specific needs.</p>
           </div>
         </footer>
       </main>
