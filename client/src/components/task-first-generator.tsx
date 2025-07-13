@@ -10,7 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Wand2, Cpu, Target, CheckCircle, ArrowRight, Lightbulb, AlertTriangle } from "lucide-react";
+import { Wand2, Cpu, Target, CheckCircle, ArrowRight, Lightbulb, AlertTriangle, Palette } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { PromptResponse } from "@/lib/types";
 import ResultsDisplay from "./results-display";
