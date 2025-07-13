@@ -66,14 +66,7 @@ export default function TaskFirstGenerator() {
   // Mutation for task analysis
   const analyzeTaskMutation = useMutation({
     mutationFn: async (data: TaskAnalysisRequest) => {
-      const response = await apiRequest("/api/analyze-task", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || "Failed to analyze task");
-      }
+      const response = await apiRequest("POST", "/api/analyze-task", data);
       return response.json() as Promise<ModelRecommendation>;
     },
     onSuccess: (data: ModelRecommendation) => {
@@ -97,14 +90,7 @@ export default function TaskFirstGenerator() {
   // Mutation for prompt generation
   const generatePromptMutation = useMutation({
     mutationFn: async (data: TaskFirstPromptRequest) => {
-      const response = await apiRequest("/api/generate-task-prompt", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || "Failed to generate prompt");
-      }
+      const response = await apiRequest("POST", "/api/generate-task-prompt", data);
       return response.json() as Promise<PromptResponse>;
     },
     onSuccess: (data: PromptResponse) => {
